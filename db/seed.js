@@ -1,4 +1,15 @@
-const { client, getAllUsers, createUser } = require("./index");
+const {
+  client,
+  getAllUsers,
+  createUser,
+  createDiagnosis,
+  createSymptoms,
+  createDiagnosisSymptoms,
+  getAllDiagnosis,
+  getAllSymptoms,
+  getAllDiagnosisSymptoms,
+} = require("./index");
+const { diagnosis, symptomsAndSigns, diagnosisSymptoms } = require("./data");
 
 async function dropTables() {
   try {
@@ -6,6 +17,10 @@ async function dropTables() {
 
     await client.query(`
         DROP TABLE IF EXISTS users;
+        DROP TABLE IF EXISTS diagnosisSymptoms;
+        DROP TABLE IF EXISTS diagnosis;
+        DROP TABLE IF EXISTS symptomsAndSigns;
+        
       `);
 
     console.log("Finished dropping tables!");
@@ -27,6 +42,26 @@ async function createTables() {
           name VARCHAR(255) NOT NULL,
           active BOOLEAN DEFAULT true
         );
+      `);
+    await client.query(`
+      CREATE TABLE diagnosis ( 
+        id SERIAL PRIMARY KEY, 
+        name VARCHAR(255) NOT NULL, 
+        phase VARCHAR(255) NOT NULL 
+        );
+      `);
+    await client.query(`
+      CREATE TABLE symptomsAndSigns ( 
+        id SERIAL PRIMARY KEY, 
+        description TEXT NOT NULL 
+       );
+      `);
+    await client.query(`
+      CREATE TABLE diagnosisSymptoms ( 
+        id SERIAL PRIMARY KEY, 
+        "diagnosisId" INTEGER REFERENCES diagnosis(id),
+        "symptomsAndSignsId" INTEGER REFERENCES symptomsAndSigns(id) 
+       );
       `);
 
     console.log("Finished building tables!");
@@ -70,6 +105,12 @@ async function rebuildDB() {
     await dropTables();
     await createTables();
     await createInitialUsers();
+    await Promise.all(diagnosis.map(createDiagnosis));
+    await Promise.all(symptomsAndSigns.map(createSymptoms));
+    await Promise.all(diagnosisSymptoms.map(createDiagnosisSymptoms));
+    await getAllDiagnosis();
+    await getAllSymptoms();
+    await getAllDiagnosisSymptoms();
   } catch (error) {
     throw error;
   }
@@ -81,6 +122,15 @@ async function testDB() {
 
     const users = await getAllUsers();
     console.log("getAllUsers:", users);
+
+    const diagnosis = await getAllDiagnosis();
+    console.log("getAllDiagnosis", diagnosis);
+
+    const symptoms = await getAllSymptoms();
+    console.log("getAllSymptoms", symptoms);
+
+    const dxsymptoms = await getAllDiagnosisSymptoms();
+    console.log("getAllDiagnosisSymptoms", dxsymptoms);
 
     console.log("Finished database tests!");
   } catch (error) {
