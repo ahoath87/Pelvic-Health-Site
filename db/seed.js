@@ -8,6 +8,9 @@ const {
   getAllDiagnosis,
   getAllSymptoms,
   getAllDiagnosisSymptoms,
+  getDiagnosisById,
+  getSymptomById,
+  getDiagnosisBySymptomId,
 } = require("./index");
 const { diagnosis, symptomsAndSigns, diagnosisSymptoms } = require("./data");
 
@@ -60,7 +63,8 @@ async function createTables() {
       CREATE TABLE diagnosisSymptoms ( 
         id SERIAL PRIMARY KEY, 
         "diagnosisId" INTEGER REFERENCES diagnosis(id),
-        "symptomsAndSignsId" INTEGER REFERENCES symptomsAndSigns(id) 
+        "symptomsAndSignsId" INTEGER REFERENCES symptomsAndSigns(id),
+        UNIQUE ("diagnosisId", "symptomsAndSignsId")
        );
       `);
 
@@ -108,6 +112,7 @@ async function rebuildDB() {
     await Promise.all(diagnosis.map(createDiagnosis));
     await Promise.all(symptomsAndSigns.map(createSymptoms));
     await Promise.all(diagnosisSymptoms.map(createDiagnosisSymptoms));
+    // await Promise.all(diagnosisSymptoms.map(getDiagnosisBySymptomId));
     await getAllDiagnosis();
     await getAllSymptoms();
     await getAllDiagnosisSymptoms();
@@ -131,6 +136,19 @@ async function testDB() {
 
     const dxsymptoms = await getAllDiagnosisSymptoms();
     console.log("getAllDiagnosisSymptoms", dxsymptoms);
+
+    const diagnosisbyId = await getDiagnosisById(1);
+    console.log("getDiagnosisById", diagnosisbyId);
+
+    const symptomsById = await getSymptomById(1);
+    console.log("getsymptomsById", symptomsById);
+
+    const dxbySymptomId = await getDiagnosisBySymptomId(7);
+
+    // const dxbySymptomId = await Promise.all(
+    //   diagnosisSymptoms.map(getDiagnosisBySymptomId(7))
+    // );
+    console.log("getdxBysymtpomId", dxbySymptomId);
 
     console.log("Finished database tests!");
   } catch (error) {
