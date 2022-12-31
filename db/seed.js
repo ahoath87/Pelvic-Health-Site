@@ -63,8 +63,8 @@ async function createTables() {
       CREATE TABLE diagnosisSymptoms ( 
         id SERIAL PRIMARY KEY, 
         "diagnosisId" INTEGER REFERENCES diagnosis(id),
-        "symptomsAndSignsId" INTEGER REFERENCES symptomsAndSigns(id),
-        UNIQUE ("diagnosisId", "symptomsAndSignsId")
+        "symptomsAndSignsId" INTEGER REFERENCES symptomsAndSigns(id)
+                   
        );
       `);
 
@@ -143,7 +143,7 @@ async function testDB() {
     const symptomsById = await getSymptomById(1);
     console.log("getsymptomsById", symptomsById);
 
-    const dxbySymptomId = await getDiagnosisBySymptomId(7);
+    const dxbySymptomId = await getDiagnosisBySymptomId(14);
 
     // const dxbySymptomId = await Promise.all(
     //   diagnosisSymptoms.map(getDiagnosisBySymptomId(7))

@@ -165,19 +165,16 @@ const getDiagnosisById = async (diagnosisId) => {
 
 async function getDiagnosisBySymptomId(symptomsAndSignsId) {
   try {
-    const {
-      rows: [diagnosisIds],
-    } = await client.query(
+    console.log("thisis symptoms and signsID", symptomsAndSignsId);
+    const { rows: diagnosisIdList } = await client.query(
       `
   SELECT ("diagnosisId") FROM diagnosisSymptoms
-  WHERE "symptomsAndSignsId" = $1 ;
-  `,
+  WHERE "symptomsAndSignsId" = $1
+  
+      ;`,
       [symptomsAndSignsId]
     );
-    // const diagnosis = await Promise.all(
-    //   diagnosisIds.map((diagnosis) => getDiagnosisById(diagnosis.id))
-    // );
-    return diagnosisIds;
+    return diagnosisIdList;
   } catch (error) {
     console.error("error getting diagnosis", error);
   }
