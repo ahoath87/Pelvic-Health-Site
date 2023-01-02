@@ -11,6 +11,8 @@ const {
   getDiagnosisById,
   getSymptomById,
   getDiagnosisBySymptomId,
+  getUserById,
+  getUserByUsername,
 } = require("./index");
 const { diagnosis, symptomsAndSigns, diagnosisSymptoms } = require("./data");
 
@@ -149,6 +151,12 @@ async function testDB() {
     //   diagnosisSymptoms.map(getDiagnosisBySymptomId(7))
     // );
     console.log("getdxBysymtpomId", dxbySymptomId);
+
+    const userById = await getUserById(1);
+    console.log("getting user by Id", userById);
+
+    const userByUsername = await getUserByUsername("ashley");
+    console.log("getting user by username", userByUsername);
 
     console.log("Finished database tests!");
   } catch (error) {

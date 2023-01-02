@@ -31,6 +31,39 @@ async function getAllUsers() {
   return rows;
 }
 
+async function getUserById(userId) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(`
+    SELECT id, password, username, name FROM users Where id = ${userId};
+    `);
+    delete user.password;
+    if (user.length === 0) {
+      return null;
+    }
+    return user;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function getUserByUsername(username) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+    SELECT * FROM users
+    WHERE username = $1;`,
+      [username]
+    );
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
 // ************* diagnosis starts here ************
 
 //inserts a diagnosis
@@ -193,4 +226,6 @@ module.exports = {
   getDiagnosisById,
   getSymptomById,
   getDiagnosisBySymptomId,
+  getUserById,
+  getUserByUsername,
 };
