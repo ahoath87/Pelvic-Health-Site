@@ -1,23 +1,63 @@
-import React, { useEffect, useState } from "react";
 import "./App.css";
+import { React, useEffect, useState } from "react";
+import { Home, Login, Register } from "./components/index";
+import { Route, Routes } from "react-router-dom";
+import { fetchMe } from "./api/auth";
 
 function App() {
-  const [backendData, setBackendData] = useState([{}]);
+  const [backendUser, setBackendUser] = useState([{}]);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     fetch("/api/users")
       .then((response) => response.json())
       .then((data) => {
-        setBackendData(data);
+        setBackendUser(data);
       });
   }, []);
+
+  useEffect(() => {
+    const getMe = async () => {
+      const data = await fetchMe(token);
+      setUser(data);
+
+      console.log("this is data", data);
+      console.log("this is token", token);
+    };
+    if (token) {
+      getMe();
+    }
+  }, [token]);
+
+  // console.log("this is backenduser", backendUser);
   return (
-    <div>
-      {typeof backendData.users === "undefined" ? (
-        <p>Loading</p>
-      ) : (
-        backendData.users.map((user) => <p key={user.id}>{user.name}</p>)
-      )}
+    <div className="App">
+      <div>
+        {typeof backendUser.users === "undefined" ? (
+          <p>Loading</p>
+        ) : (
+          backendUser.users.map((user) => <p key={user.id}>{user.name}</p>)
+        )}
+      </div>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route
+          path="/login"
+          element={
+            <Login
+              token={token}
+              setToken={setToken}
+              user={user}
+              setUser={setUser}
+            />
+          }
+        ></Route>
+        <Route
+          path="/register"
+          element={<Register setToken={setToken} />}
+        ></Route>
+      </Routes>
     </div>
   );
 }

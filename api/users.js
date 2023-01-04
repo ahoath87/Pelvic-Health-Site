@@ -1,13 +1,25 @@
 // api/users.js
 const express = require("express");
+const cors = require("cors");
+const { appendFile } = require("fs");
 const usersRouter = express.Router();
-const { getAllUsers, getUserByUsername, createUser } = require("../db");
+const {
+  getAllUsers,
+  getUserByUsername,
+  createUser,
+  getUserById,
+} = require("../db");
 
 usersRouter.use((req, res, next) => {
   console.log("A request is being made to /users");
 
   next();
 });
+
+// usersRouter.get("/cors", (req, res) => {
+//   res.set("Acess-Control-Allow-Origin", "*");
+//   res.send("this has CORS enabled");
+// });
 
 usersRouter.get("/", async (req, res) => {
   const users = await getAllUsers();
@@ -38,7 +50,7 @@ usersRouter.post("/register", async (req, res, next) => {
 
     const token = jwt.sign(
       {
-        ide: user.id,
+        id: user.id,
         username,
       },
       process.env.JWT_SECRET,
@@ -48,7 +60,7 @@ usersRouter.post("/register", async (req, res, next) => {
     );
     res.send({
       message: "thank you for signing up",
-      token,
+      token: token,
     });
   } catch ({ name, message }) {
     next({ name, message });
@@ -58,6 +70,7 @@ usersRouter.post("/register", async (req, res, next) => {
 usersRouter.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   const jwt = require("jsonwebtoken");
+  console.log("inside login api stuff");
   // request must have both
   if (!username || !password) {
     next({
@@ -86,6 +99,16 @@ usersRouter.post("/login", async (req, res, next) => {
     console.log(error);
     next(error);
   }
+});
+
+usersRouter.get("/me", async (req, res, next) => {
+  try {
+    console.log(req.user);
+    const user = await req.user;
+    if (user) {
+      res.send({ user });
+    }
+  } catch (error) {}
 });
 
 module.exports = usersRouter;

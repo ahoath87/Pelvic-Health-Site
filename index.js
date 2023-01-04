@@ -4,12 +4,18 @@ const express = require("express");
 const server = express();
 const apiRouter = require("./api");
 const morgan = require("morgan");
+const cors = require("cors");
 
 //********* middleware ************/
 server.use(morgan("dev"));
 server.use(express.json());
 
 // ********** api router *********
+server.use(cors());
+
+server.get("/products/:id", function (req, res, next) {
+  res.json({ msg: "This is CORS-enabled for all origins!" });
+});
 
 server.use("/api", apiRouter);
 
