@@ -9,6 +9,7 @@ const {
   createUser,
   getUserById,
 } = require("../db");
+const bcrypt = require("bcrypt");
 
 usersRouter.use((req, res, next) => {
   console.log("A request is being made to /users");
@@ -81,8 +82,10 @@ usersRouter.post("/login", async (req, res, next) => {
 
   try {
     const user = await getUserByUsername(username);
+    const hashedPassword = user.password;
+    const match = await bcrypt.compare(password, hashedPassword);
 
-    if (user && user.password == password) {
+    if (user && match) {
       const token = jwt.sign(
         { id: user.id, username: user.username },
         process.env.JWT_SECRET
@@ -108,7 +111,9 @@ usersRouter.get("/me", async (req, res, next) => {
     if (user) {
       res.send({ user });
     }
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = usersRouter;

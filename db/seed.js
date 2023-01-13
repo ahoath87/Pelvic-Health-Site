@@ -1,7 +1,5 @@
+const client = require("./client");
 const {
-  client,
-  getAllUsers,
-  createUser,
   createDiagnosis,
   createSymptoms,
   createDiagnosisSymptoms,
@@ -11,9 +9,19 @@ const {
   getDiagnosisById,
   getSymptomById,
   getDiagnosisBySymptomId,
+  createUser,
+  getAllUsers,
   getUserById,
   getUserByUsername,
+  getAllSymptomsByDiagnosis,
+  getDiagnosisNameBySymptomId,
 } = require("./index");
+// const {
+//   createUser,
+//   getAllUsers,
+//   getUserById,
+//   getUserByUsername,
+// } = require("./users");
 const { diagnosis, symptomsAndSigns, diagnosisSymptoms } = require("./data");
 
 async function dropTables() {
@@ -157,6 +165,12 @@ async function testDB() {
 
     const userByUsername = await getUserByUsername("ashley");
     console.log("getting user by username", userByUsername);
+
+    const symptomsByDiagnosis = await getAllSymptomsByDiagnosis(1);
+    console.log("getting symptoms by diagnosis", symptomsByDiagnosis);
+
+    const diagnosisName = await getDiagnosisNameBySymptomId(1);
+    console.log("getting name of diagnosis by symptoms id", diagnosisName);
 
     console.log("Finished database tests!");
   } catch (error) {

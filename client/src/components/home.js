@@ -1,6 +1,7 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 import "./Home.css";
+import { Link } from "react";
 
 const Home = () => {
   return (
@@ -21,7 +22,7 @@ const Home = () => {
         <button>
           {" "}
           Register
-          {/* <Link to="/register">Register Here! </Link> */}
+          <Link to="/register">Register Here! </Link>
         </button>
         <button>
           {" "}

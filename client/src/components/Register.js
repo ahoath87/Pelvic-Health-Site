@@ -10,7 +10,7 @@ const Register = ({ setToken }) => {
 
   return (
     <div>
-      <h1>Welcome {name}</h1>
+      <h1>Welcome {name}!</h1>
       <form
         onSubmit={async (e) => {
           if (password.length > 5 && username.length > 5) {

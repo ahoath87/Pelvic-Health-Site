@@ -5,6 +5,8 @@ const server = express();
 const apiRouter = require("./api");
 const morgan = require("morgan");
 const cors = require("cors");
+const client = require("./db/client");
+client.connect();
 
 //********* middleware ************/
 server.use(morgan("dev"));
@@ -27,9 +29,8 @@ server.use((req, res, next) => {
   next();
 });
 
-const { client } = require("./db");
-client.connect();
-
 server.listen(PORT, () => {
   console.log("the server is up on port", PORT);
 });
+
+module.exports = server;
