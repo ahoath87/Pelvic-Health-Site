@@ -1,15 +1,15 @@
 // api/index.js
-const express = require("express");
+const express = require('express');
 const apiRouter = express.Router();
 
-const jwt = require("jsonwebtoken");
-const { getUserById } = require("../db");
+const jwt = require('jsonwebtoken');
+const { getUserById } = require('../db');
 const { JWT_SECRET } = process.env;
 
 // set `req.user` if possible
 apiRouter.use(async (req, res, next) => {
-  const prefix = "Bearer ";
-  const auth = req.header("Authorization");
+  const prefix = 'Bearer ';
+  const auth = req.header('Authorization');
 
   if (!auth) {
     // nothing to see here
@@ -29,7 +29,7 @@ apiRouter.use(async (req, res, next) => {
     }
   } else {
     next({
-      name: "AuthorizationHeaderError",
+      name: 'AuthorizationHeaderError',
       message: `Authorization token must start with ${prefix}`,
     });
   }
@@ -37,25 +37,25 @@ apiRouter.use(async (req, res, next) => {
 
 apiRouter.use((req, res, next) => {
   if (req.user) {
-    console.log("User is set:", req.user);
+    console.log('User is set:', req.user);
   }
   next();
 });
 
-const usersRouter = require("./users");
-apiRouter.use("/users", usersRouter);
+const usersRouter = require('./users');
+apiRouter.use('/users', usersRouter);
 
-const diagnosisRouter = require("./diagnosis");
-apiRouter.use("/diagnosis", diagnosisRouter);
+const diagnosisRouter = require('./diagnosis');
+apiRouter.use('/diagnosis', diagnosisRouter);
 
-const symptomsRouter = require("./symptoms");
-apiRouter.use("/symptoms", symptomsRouter);
+const symptomsRouter = require('./symptoms');
+apiRouter.use('/symptoms', symptomsRouter);
 
-apiRouter.use((error, req, res, next) => {
-  res.send({
-    name: error.name,
-    message: error.message,
-  });
-});
+// apiRouter.use((error, req, res, next) => {
+//   res.send({
+//     name: error.name,
+//     message: error.message,
+//   });
+// });
 
 module.exports = apiRouter;

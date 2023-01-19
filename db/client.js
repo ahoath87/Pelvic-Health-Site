@@ -1,12 +1,12 @@
-const { Pool } = require("pg");
+const { Pool } = require('pg');
 
 const connectionString =
-  process.env.DATABASE_URL || "https://localhost:5432/self-led-project01-dev";
+  process.env.DATABASE_URL || 'https://localhost:5432/self-led-project01-dev';
 
 const client = new Pool({
   connectionString,
   ssl:
-    process.env.NODE_ENV === "production"
+    process.env.NODE_ENV === 'production'
       ? { rejectUnauthorized: false }
       : undefined,
 });
