@@ -1,29 +1,30 @@
-import "./App.css";
-import { React, useEffect, useState } from "react";
-import { Home, Login, Register } from "./components/index";
-import { Route, Routes } from "react-router-dom";
-import { fetchMe } from "./api/auth";
+import './App.css';
+import { React, useEffect, useState } from 'react';
+import background from './assets/images/background.jpg';
+import { Home, Login, Register, Nav } from './components/index';
+import { Route, Routes } from 'react-router-dom';
+import { fetchMe } from './api/auth';
 
 function App() {
-  const [backendUser, setBackendUser] = useState([{}]);
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  // const [backendUser, setBackendUser] = useState([{}]);
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [user, setUser] = useState({});
 
-  useEffect(() => {
-    fetch("/api/users")
-      .then((response) => response.json())
-      .then((data) => {
-        setBackendUser(data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch('/api/users')
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setBackendUser(data);
+  //     });
+  // }, []);
 
   useEffect(() => {
     const getMe = async () => {
       const data = await fetchMe(token);
       setUser(data);
 
-      console.log("this is data", data);
-      console.log("this is token", token);
+      console.log('this is data', data);
+      console.log('this is token', token);
     };
     if (token) {
       getMe();
@@ -32,18 +33,14 @@ function App() {
 
   // console.log("this is backenduser", backendUser);
   return (
-    <div className="App">
+    <div className='App' style={{ backgroundImage: `url(${background})` }}>
       <div>
-        {typeof backendUser.users === "undefined" ? (
-          <p>Loading</p>
-        ) : (
-          backendUser.users.map((user) => <p key={user.id}>{user.name}</p>)
-        )}
+        <Nav></Nav>
       </div>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route path='/' element={<Home />}></Route>
         <Route
-          path="/login"
+          path='/login'
           element={
             <Login
               token={token}
@@ -54,7 +51,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/register"
+          path='/register'
           element={<Register setToken={setToken} />}
         ></Route>
       </Routes>

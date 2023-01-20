@@ -1,0 +1,49 @@
+#navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-left: 0;
+    background-color: white;
+    padding: 2em;
+}
+
+
+#links {
+    display: flex;
+    flex-direction: row;
+   align-items: center;
+   justify-content: right;
+   
+     
+}
+
+/* #loggedin-nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #dbd8e3;
+    font-size: 20px;
+} */
+
+#Home-link{
+    margin-right: 1em;
+}
+
+#Register-link{
+    margin-right: 1em;
+}
+
+#Login-link{
+    margin-right: 1em;
+}
+
+#routines-link{
+    margin-right: 1em;
+}
+
+
+#log-out{
+    color: #dbd8e3;
+}
