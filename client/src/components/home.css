@@ -1,0 +1,9 @@
+#home{
+    width: 100%;
+    padding: 15em;
+    font-size: 20px;
+    color: white;
+}
+#home-text{
+  margin-right: 85%;
+}

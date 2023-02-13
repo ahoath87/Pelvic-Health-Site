@@ -1,7 +1,7 @@
 import './App.css';
 import { React, useEffect, useState } from 'react';
-import background from './assets/images/background.jpg';
-import { Home, Login, Register, Nav } from './components/index';
+
+import { Home, Login, Register, Nav, SymptomsQuiz } from './components/index';
 import { Route, Routes } from 'react-router-dom';
 import { fetchMe } from './api/auth';
 
@@ -33,7 +33,7 @@ function App() {
 
   // console.log("this is backenduser", backendUser);
   return (
-    <div className='App' style={{ backgroundImage: `url(${background})` }}>
+    <div className='App'>
       <div>
         <Nav></Nav>
       </div>
@@ -54,6 +54,7 @@ function App() {
           path='/register'
           element={<Register setToken={setToken} />}
         ></Route>
+        <Route path='quiz' element={<SymptomsQuiz />}></Route>
       </Routes>
     </div>
   );
