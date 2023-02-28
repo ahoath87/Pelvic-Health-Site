@@ -1,4 +1,4 @@
-const client = require("./client");
+const client = require('./client');
 // ************* symptoms start here ************
 
 // inserts a symptom
@@ -48,7 +48,7 @@ const getSymptomById = async (id) => {
     console.log(symptom);
     return symptom;
   } catch (error) {
-    console.error("error in getSypmtomsById", error);
+    console.error('error in getSypmtomsById', error);
   }
 };
 
@@ -68,6 +68,26 @@ async function getAllSymptomsByDiagnosis(id) {
     throw error;
   }
 }
+
+// async function getAllSymptomsThatShareDiagnosisId(id) {
+//   try {
+//     const { rows } = await client.query(
+//       `
+//       SELECT symptomsAndSigns.*
+//       FROM symptomsAndSigns
+//       JOIN diagnosisSymptoms ON symptomsAndSigns.id = diagnosisSymptoms."symptomsAndSignsId"
+//       WHERE
+
+//       `
+//     );
+//   } catch (error) {}
+// }
+
+// get all diagnosis by symptomandsign Id
+// get all symtpoms by diagnosis ids
+// get all symptoms by diagnosis id --- attach the symptoms map them and exclude the original symptom
+
+// get symptoms by diagnosis Id
 
 module.exports = {
   createSymptoms,

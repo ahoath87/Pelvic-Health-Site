@@ -1,4 +1,4 @@
-const client = require("./client");
+const client = require('./client');
 
 // ************* diagnosis starts here ************
 
@@ -45,13 +45,14 @@ const getDiagnosisById = async (diagnosisId) => {
     console.log(diagnosis);
     return diagnosis;
   } catch (error) {
-    console.error("error in getDiagnoisisById", error);
+    console.error('error in getDiagnoisisById', error);
   }
 };
 
+//get a diagnosis by its symptoms and sign Id
 async function getDiagnosisNameBySymptomId(symptomsAndSignsId) {
   try {
-    console.log("thisis symptoms and signsID", symptomsAndSignsId);
+    console.log('thisis symptoms and signsID', symptomsAndSignsId);
     const { rows: diagnosisList } = await client.query(
       `
     SELECT diagnosis.* 
@@ -63,7 +64,7 @@ async function getDiagnosisNameBySymptomId(symptomsAndSignsId) {
     );
     return diagnosisList;
   } catch (error) {
-    console.error("error getting diagnosis", error);
+    console.error('error getting diagnosis', error);
   }
 }
 
