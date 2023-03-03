@@ -1,7 +1,14 @@
 import './App.css';
 import { React, useEffect, useState } from 'react';
 
-import { Home, Login, Register, Nav, SymptomsQuiz } from './components/index';
+import {
+  Home,
+  Login,
+  Register,
+  Nav,
+  Quiz,
+  SecondQuiz,
+} from './components/index';
 import { Route, Routes } from 'react-router-dom';
 import { fetchMe } from './api/auth';
 
@@ -10,28 +17,16 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [user, setUser] = useState({});
 
-  // useEffect(() => {
-  //   fetch('/api/users')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setBackendUser(data);
-  //     });
-  // }, []);
-
   useEffect(() => {
     const getMe = async () => {
       const data = await fetchMe(token);
       setUser(data);
-
-      console.log('this is data', data);
-      console.log('this is token', token);
     };
     if (token) {
       getMe();
     }
   }, [token]);
 
-  // console.log("this is backenduser", backendUser);
   return (
     <div className='App'>
       <div>
@@ -54,7 +49,8 @@ function App() {
           path='/register'
           element={<Register setToken={setToken} />}
         ></Route>
-        <Route path='quiz' element={<SymptomsQuiz />}></Route>
+        <Route path='/quiz' element={<Quiz />}></Route>
+        <Route path='/secondquiz' element={<SecondQuiz />}></Route>
       </Routes>
     </div>
   );
