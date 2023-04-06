@@ -4,7 +4,7 @@ const chalk = require('chalk');
 // const client = require('./db/client');
 // const apiRouter = require('./api');
 
-const PORT = 5000;
+const PORT = 8080;
 // const server = http.createServer(app);
 
 app.listen(PORT, () => {

@@ -1,12 +1,13 @@
-import "./Register.css";
+import './Register.css';
 
-import { React, useState } from "react";
-import { registerUser } from "../api/auth";
+import { React, useState } from 'react';
+import { registerUser } from '../api/auth';
 
 const Register = ({ setToken }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState(" ");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState(' ');
+  const [email, setEmail] = useState('');
 
   return (
     <div>
@@ -17,16 +18,16 @@ const Register = ({ setToken }) => {
             try {
               e.preventDefault();
               //changed the response to token as it was changed form the auth.js
-              const token = await registerUser(username, password, name);
+              const token = await registerUser(username, password, name, email);
               // setting token into global storage so it can be pulled throughout the app
               setToken(token);
               //get this setToken function and update the state for the refined token
-              localStorage.setItem("token", token);
+              localStorage.setItem('token', token);
               //go back and make the the local to be the storage
-              console.log("this is token in register", token);
-              setUsername("");
-              setPassword("");
-              setName("");
+              console.log('this is token in register', token);
+              setUsername('');
+              setPassword('');
+              setName('');
               //   setIsRegistered(true);
             } catch (error) {
               console.error(error);
@@ -37,27 +38,34 @@ const Register = ({ setToken }) => {
         <h2>Registration</h2>
 
         <input
-          id="User"
+          id='User'
           value={username}
-          type="text"
-          placeholder="username"
+          type='text'
+          placeholder='username'
           onChange={(e) => setUsername(e.target.value)}
         ></input>
         <input
-          id="Pass"
+          id='Pass'
           value={password}
-          type="password"
-          placeholder="password"
+          type='password'
+          placeholder='password'
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <input
-          id="reg_name"
+          id='reg_name'
           value={name}
-          type="text"
-          placeholder="name"
+          type='text'
+          placeholder='Name here'
           onChange={(e) => setName(e.target.value)}
         ></input>
-        <button id="submitten" type="submit">
+        <input
+          id='reg_email'
+          value={email}
+          type='text'
+          placeholder='email'
+          onChange={(e) => setEmail(e.target.value)}
+        ></input>
+        <button id='submitten' type='submit'>
           submit
         </button>
       </form>

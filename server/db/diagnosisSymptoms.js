@@ -1,4 +1,4 @@
-const client = require("./client");
+const client = require('./client');
 
 //inserts a diagnosis symtpom
 const createDiagnosisSymptoms = async (diagnosisSymptoms) => {
@@ -29,13 +29,14 @@ const getAllDiagnosisSymptoms = async () => {
       `);
     return dxsymptoms;
   } catch (error) {
-    console.error("error getting diagnosis", error);
+    console.error('error getting diagnosis', error);
   }
 };
 
+// gets the diagnosis by diagnosis symptom
 async function getDiagnosisBySymptomId(symptomsAndSignsId) {
   try {
-    console.log("thisis symptoms and signsID", symptomsAndSignsId);
+    console.log('thisis symptoms and signsID', symptomsAndSignsId);
     const { rows: diagnosisIdList } = await client.query(
       `
     SELECT ("diagnosisId") FROM diagnosisSymptoms
@@ -46,7 +47,7 @@ async function getDiagnosisBySymptomId(symptomsAndSignsId) {
     );
     return diagnosisIdList;
   } catch (error) {
-    console.error("error getting diagnosis", error);
+    console.error('error getting diagnosis', error);
   }
 }
 

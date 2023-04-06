@@ -15,6 +15,7 @@ const {
   getUserByUsername,
   getAllSymptomsByDiagnosis,
   getDiagnosisNameBySymptomId,
+  getSymptomIdbySymptomDescription,
   getUser,
 } = require('./index');
 // const {
@@ -176,6 +177,11 @@ async function testDB() {
 
     const symptomsByDiagnosis = await getAllSymptomsByDiagnosis(1);
     console.log('getting symptoms by diagnosis', symptomsByDiagnosis);
+
+    const symptomIdByDescription = await getSymptomIdbySymptomDescription(
+      'pelvic pain'
+    );
+    console.log('gettingSympomtIDbyDESc', symptomIdByDescription);
 
     const diagnosisName = await getDiagnosisNameBySymptomId(1);
     console.log('getting name of diagnosis by symptoms id', diagnosisName);
