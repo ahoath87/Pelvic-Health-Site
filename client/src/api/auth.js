@@ -31,11 +31,11 @@ export const loginUser = async (username, password) => {
   return data.token;
 };
 
-export const registerUser = async (username, password, name) => {
+export const registerUser = async (username, password, name, email) => {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password, name }),
+    body: JSON.stringify({ username, password, name, email }),
   };
   const response = await fetch(API_URL + '/users/register', requestOptions);
   const data = await response.json();

@@ -32,7 +32,7 @@ usersRouter.get('/', async (req, res) => {
 });
 
 usersRouter.post('/register', async (req, res, next) => {
-  const { username, password, name } = req.body;
+  const { username, password, name, email } = req.body;
   const jwt = require('jsonwebtoken');
   try {
     const _user = await getUserByUsername(username);
@@ -48,6 +48,7 @@ usersRouter.post('/register', async (req, res, next) => {
       username,
       password,
       name,
+      email,
     });
 
     const token = jwt.sign(
