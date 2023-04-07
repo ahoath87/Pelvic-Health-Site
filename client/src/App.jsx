@@ -30,12 +30,17 @@ function App() {
 
   return (
     <div className='App'>
-      <div>
-        <SmallNav></SmallNav>
-        <Nav></Nav>
-      </div>
       <Routes>
-        <Route path='/' element={<Home />}></Route>
+        <Route
+          path='/'
+          element={
+            <div>
+              <SmallNav />
+              <Nav />
+              <Home />
+            </div>
+          }
+        ></Route>
         <Route
           path='/login'
           element={
