@@ -1,4 +1,4 @@
-import './Register.css';
+import './css/Register.css';
 
 import { React, useState } from 'react';
 import { registerUser } from '../api/auth';

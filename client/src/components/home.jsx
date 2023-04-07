@@ -1,14 +1,14 @@
 import React from 'react';
-// import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import women from '../assets/images/women.png';
-import './home.css';
+import './css/home.css';
 
 // import { Link } from 'react';
 
 const Home = () => {
   return (
     <div
-      id='home'
+      className='home'
       style={{
         backgroundImage: `url(${women})`,
         backgroundRepeat: 'no-repeat',
@@ -24,26 +24,32 @@ const Home = () => {
             treatments on visit one are 80% due to your subjective description
             of complaints?!{' '}
           </p>
-          <p>Click here to find out what this means for you </p>
+          <p id='site-description'>
+            Click here to find out what this means for you{' '}
+          </p>
 
           <div id='home-buttons'>
-            <p>
+            <p id='site-description'>
               {' '}
               Register and Login to gain access to our diagnosis and treatments
               guided questionaire!{' '}
             </p>
           </div>
         </div>
-        <button>
-          {' '}
-          Register
-          {/* <Link to="/register">Register Here! </Link> */}
-        </button>
-        <button>
-          {' '}
-          Login
-          {/* <Link to="/login">Login Here!</Link> */}
-        </button>{' '}
+        <div className='button-container'>
+          <div className='butt-div'>
+            {' '}
+            <Link id='home-reglink' to='/register'>
+              Register Here!{' '}
+            </Link>
+          </div>
+          <div className='butt-div'>
+            {' '}
+            <Link id='home-loglink' to='/login'>
+              Login Here!
+            </Link>
+          </div>{' '}
+        </div>
       </div>
     </div>
   );

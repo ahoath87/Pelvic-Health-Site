@@ -1,6 +1,19 @@
 
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  font-family: 'Roboto', Inter, Avenir, Helvetica, Arial, sans-serif;
+  /* font-size: 16px;
+  line-height: 24px; */
+  font-weight: 400;
+  margin: 0 auto;
+  /* color-scheme: light dark; */
+  /* color: rgba(38, 70, 83); */
+  /* background-color: #ffffff; */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  /* max-width: 100%; */
+  text-align: center;
 }
+

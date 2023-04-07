@@ -1,10 +1,10 @@
-import "./Login.css";
-import { React, useState } from "react";
-import { loginUser } from "../api/auth";
+import './css/Login.css';
+import { React, useState } from 'react';
+import { loginUser } from '../api/auth';
 
 const Login = ({ setToken }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <div>
@@ -18,11 +18,11 @@ const Login = ({ setToken }) => {
               // setting token into global storage so it can be pulled throughout the app
               setToken(token);
               //get this setToken function and update the state for the refined token
-              localStorage.setItem("token", token);
+              localStorage.setItem('token', token);
               //go back and make the the local to be the storage
-              console.log("this is token in login", token);
-              setUsername("");
-              setPassword("");
+              console.log('this is token in login', token);
+              setUsername('');
+              setPassword('');
             } catch (error) {
               console.error(error);
             }
@@ -32,20 +32,20 @@ const Login = ({ setToken }) => {
         <h2>Login</h2>
         {/* <h1>Welcome {user?.username}!</h1> */}
         <input
-          id="User"
+          id='User'
           value={username}
-          type="text"
-          placeholder="username"
+          type='text'
+          placeholder='username'
           onChange={(e) => setUsername(e.target.value)}
         ></input>
         <input
-          id="Pass"
+          id='Pass'
           value={password}
-          type="password"
-          placeholder="password"
+          type='password'
+          placeholder='password'
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <button id="submitten" type="submit">
+        <button id='submitten' type='submit'>
           submit
         </button>
       </form>

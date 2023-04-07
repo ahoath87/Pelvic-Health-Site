@@ -1,0 +1,20 @@
+#smallnavbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-left: 0;
+    background-color: rgba(228, 206, 203, 0.932);
+    padding: 1.5%;
+    position: sticky;
+    top: 0;
+}
+#links {
+    display: flex;
+   gap: 5%;
+}
+#smallnav-link{
+    color: black;
+    text-decoration: none;
+}
