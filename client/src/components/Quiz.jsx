@@ -5,30 +5,31 @@ const Quiz = () => {
   const [symptomChoice, setSymptomChoice] = useState('');
   const [symptoms, setSymptoms] = useState([]);
 
-  console.log('symptoms in QUIZ', symptoms);
+  // console.log('symptoms in QUIZ', symptoms);
 
   useEffect(() => {
     const allSymps = async () => {
       const fetchedSymps = await getAllTheSymptoms();
-      console.log('this is fecthedSymps', fetchedSymps);
+      // console.log('this is fecthedSymps', fetchedSymps);
       setSymptoms(fetchedSymps);
     };
     allSymps();
   }, []);
 
-  const submitHandler = async (e) => {
-    try {
-      e.prevenDefault();
+  // const submitHandler = async (e) => {
+  //   try {
+  //     e.prevenDefault();
+  //     console.log('gotcha symptom buddy');
 
-      console.log('BOOM BABY', symptomChoice);
-    } catch (error) {
-      console.errer(error);
-    }
-  };
+  //     console.log('BOOM BABY', symptomChoice);
+  //   } catch (error) {
+  //     console.errer(error);
+  //   }
+  // };
 
   function onChangeValue(event) {
     setSymptomChoice(event.target.value);
-    console.log('this is symptomChoice', event.target.value);
+    console.log('this is symptomChoice', symptomChoice);
   }
   return (
     <div>
@@ -42,9 +43,9 @@ const Quiz = () => {
                     {' '}
                     <input
                       type='radio'
-                      value={symptom.description}
-                      name='firstsymptom'
-                      checked={symptomChoice === symptom.description}
+                      value={symptom.id}
+                      name={'firstsymptom'}
+                      checked={symptom.name}
                       onChange={onChangeValue}
                     ></input>
                     {symptom.description}
@@ -53,15 +54,11 @@ const Quiz = () => {
               );
             })}
         </div>
-        <div>
-          <button
-            className='btn-quiz1'
-            type='submit'
-            onClick={(e) => submitHandler(e)}
-          >
+        {/* <div>
+          <button className='btn-quiz1' type='submit' onClick={submitHandler}>
             Submit
           </button>
-        </div>
+        </div> */}
       </form>
     </div>
   );

@@ -16,7 +16,7 @@ const Home = () => {
       }}
     >
       <div id='home-text'>
-        <h1 id='big-title'> Virtual Pelvic Health Guide </h1>
+        <h1 id='big-title'> Welcome. </h1>
         <div id='home-container'>
           <p id='site-description'>
             {' '}
