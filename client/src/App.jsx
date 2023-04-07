@@ -8,6 +8,7 @@ import {
   Nav,
   Quiz,
   SecondQuiz,
+  SmallNav,
 } from './components/index';
 import { Route, Routes } from 'react-router-dom';
 import { fetchMe } from './api/auth';
@@ -30,6 +31,7 @@ function App() {
   return (
     <div className='App'>
       <div>
+        <SmallNav></SmallNav>
         <Nav></Nav>
       </div>
       <Routes>
