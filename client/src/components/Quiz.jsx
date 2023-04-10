@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { getAllTheSymptoms } from '../api/symptoms';
 
 const Quiz = () => {
-  const [symptomChoice, setSymptomChoice] = useState('');
+  const [symptomChoice, setSymptomChoice] = useState(0);
   const [symptoms, setSymptoms] = useState([]);
+  const [selected, setSelected] = useState(false);
 
   // console.log('symptoms in QUIZ', symptoms);
 
@@ -29,6 +30,7 @@ const Quiz = () => {
 
   function onChangeValue(event) {
     setSymptomChoice(event.target.value);
+    setSelected(true);
     console.log('this is symptomChoice', symptomChoice);
   }
   return (
@@ -45,8 +47,8 @@ const Quiz = () => {
                       type='radio'
                       value={symptom.id}
                       name={'firstsymptom'}
-                      checked={symptom.name}
                       onChange={onChangeValue}
+                      defaultChecked={selected}
                     ></input>
                     {symptom.description}
                   </label>
