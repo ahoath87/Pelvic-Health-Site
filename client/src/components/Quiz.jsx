@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { getAllTheSymptoms } from '../api/symptoms';
+import SecondQuiz from './SecondQuiz';
 
 const Quiz = () => {
   const [symptomChoice, setSymptomChoice] = useState(null);
   const [symptoms, setSymptoms] = useState([]);
   // const [selected, setSelected] = useState(false);
 
-  // console.log('symptoms in QUIZ', symptoms);
-
   useEffect(() => {
     const allSymps = async () => {
       const fetchedSymps = await getAllTheSymptoms();
-      console.log('this is fecthedSymps', fetchedSymps);
+      // console.log('this is fecthedSymps', fetchedSymps);
       setSymptoms(fetchedSymps);
     };
     allSymps();
@@ -48,6 +47,7 @@ const Quiz = () => {
                     {' '}
                     <input
                       type='radio'
+                      id='radio-quizone'
                       value={symptom.id}
                       name={'firstsymptom'}
                       onChange={onChangeValue}
@@ -65,6 +65,7 @@ const Quiz = () => {
           </button>
         </div>
       </form>
+      {symptomChoice === null ? <div>Nothing here</div> : <SecondQuiz />}
     </div>
   );
 };

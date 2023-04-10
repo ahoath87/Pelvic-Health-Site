@@ -33,7 +33,7 @@ const getAllDiagnosisSymptoms = async () => {
   }
 };
 
-// gets the diagnosis by diagnosis symptom
+// gets the diagnosis id by diagnosis symptom id
 async function getDiagnosisBySymptomId(symptomsAndSignsId) {
   try {
     console.log('thisis symptoms and signsID', symptomsAndSignsId);
@@ -51,8 +51,37 @@ async function getDiagnosisBySymptomId(symptomsAndSignsId) {
   }
 }
 
+async function attachSymptomsIdsToDiagnosis(diagnosisId) {
+  // const diagnosisToReturn = [...diagnosisId];
+  // console.log('these are diganosis to return', diagnosisToReturn);
+
+  try {
+    const { rows: symptoms } = await client.query(
+      `
+  SELECT symptomsandsigns.*
+  FROM symptomsandsigns
+  JOIN diagnosissymptoms ON symptomsandsigns.id = diagnosissymptoms."symptomsAndSignsId"
+  WHERE diagnosissymptoms."diagnosisId" = $1 
+  `,
+      [diagnosisId]
+    );
+
+    // for (const diagnosis of diagnosisToReturn) {
+    //   const symptomsToAdd = symptoms.filter(
+    //     (symptom) => symptom.id === diagnosis.symptomId
+    //   );
+    //   console.log('this is symptomsToADd', symptomsToAdd);
+    //   diagnosis.symptoms = symptomsToAdd;
+    // }
+    return symptoms;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createDiagnosisSymptoms,
   getAllDiagnosisSymptoms,
   getDiagnosisBySymptomId,
+  attachSymptomsIdsToDiagnosis,
 };
