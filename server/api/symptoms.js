@@ -1,6 +1,6 @@
 const express = require('express');
 const symptomsRouter = express.Router();
-const { getAllSymptoms } = require('../db');
+const { getAllSymptoms, getDiagnosisBySymptomId } = require('../db');
 
 symptomsRouter.use((req, res, next) => {
   console.log('A request is being made to /symptoms');
@@ -8,9 +8,23 @@ symptomsRouter.use((req, res, next) => {
   next(); // THIS IS DIFFERENT
 });
 
-symptomsRouter.get('/', async (req, res) => {
-  const symptoms = await getAllSymptoms();
-  res.send(symptoms);
+symptomsRouter.get('/', async (req, res, next) => {
+  try {
+    const symptoms = await getAllSymptoms();
+    res.send(symptoms);
+  } catch (error) {
+    next(error);
+  }
 });
 
+symptomsRouter.get('/:symptomId', async (req, res, next) => {
+  let id = req.params.symptomId;
+  try {
+    const diagnosisId = await getDiagnosisBySymptomId(id);
+    console.log(diagnosisId);
+    res.send(diagnosisId);
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = symptomsRouter;
