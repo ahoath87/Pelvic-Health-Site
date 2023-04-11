@@ -4,6 +4,7 @@ import SecondQuiz from './SecondQuiz';
 
 const Quiz = () => {
   const [symptomChoice, setSymptomChoice] = useState(null);
+  const [sentChoice, setSentChoice] = useState(null);
   const [symptoms, setSymptoms] = useState([]);
   // const [selected, setSelected] = useState(false);
 
@@ -21,8 +22,10 @@ const Quiz = () => {
       if (symptomChoice == null) {
         alert('You must make a selection before submitting');
       } else {
-        console.log('BOOM BABY', symptomChoice);
-        console.log('this is symptomChoice', symptomChoice);
+        let choice = symptomChoice;
+        setSentChoice(choice);
+        console.log('BOOM BABY', sentChoice);
+        // console.log('this is symptomChoice', symptomChoice);
         e.preventDefault();
       }
     } catch (error) {
@@ -65,7 +68,11 @@ const Quiz = () => {
           </button>
         </div>
       </form>
-      {symptomChoice === null ? <div>Nothing here</div> : <SecondQuiz />}
+      {sentChoice === null ? (
+        <div>Nothing here</div>
+      ) : (
+        <SecondQuiz sentChoice={sentChoice} />
+      )}
     </div>
   );
 };
