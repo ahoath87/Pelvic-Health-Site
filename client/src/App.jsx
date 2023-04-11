@@ -9,6 +9,7 @@ import {
   Quiz,
   SecondQuiz,
   SmallNav,
+  Info,
 } from './components/index';
 import { Route, Routes } from 'react-router-dom';
 import { fetchMe } from './api/auth';
@@ -30,14 +31,15 @@ function App() {
 
   return (
     <div className='App'>
+      <SmallNav />
       <Routes>
         <Route
           path='/'
           element={
             <div>
-              <SmallNav />
               <Nav />
               <Home />
+              <Info />
             </div>
           }
         ></Route>
