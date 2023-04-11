@@ -51,9 +51,9 @@ async function getDiagnosisBySymptomId(symptomsAndSignsId) {
   }
 }
 
-async function attachSymptomsIdsToDiagnosis(diagnosisId) {
-  // const diagnosisToReturn = [...diagnosisId];
-  // console.log('these are diganosis to return', diagnosisToReturn);
+async function attachSymptomsIdsToDiagnosis(diagnosises) {
+  const diagnosisToReturn = [...diagnosises];
+  console.log('these are diganosis to return', diagnosisToReturn);
 
   try {
     const { rows: symptoms } = await client.query(
@@ -61,18 +61,18 @@ async function attachSymptomsIdsToDiagnosis(diagnosisId) {
   SELECT symptomsandsigns.*
   FROM symptomsandsigns
   JOIN diagnosissymptoms ON symptomsandsigns.id = diagnosissymptoms."symptomsAndSignsId"
-  WHERE diagnosissymptoms."diagnosisId" = $1 
-  `,
-      [diagnosisId]
+  WHERE diagnosisId = ANY ${diagnosises}
+  
+  `
     );
 
-    // for (const diagnosis of diagnosisToReturn) {
-    //   const symptomsToAdd = symptoms.filter(
-    //     (symptom) => symptom.id === diagnosis.symptomId
-    //   );
-    //   console.log('this is symptomsToADd', symptomsToAdd);
-    //   diagnosis.symptoms = symptomsToAdd;
-    // }
+    for (const diagnosis of diagnosisToReturn) {
+      const symptomsToAdd = symptoms.filter(
+        (symptom) => symptom.id === diagnosis.symptomId
+      );
+      console.log('this is symptomsToADd', symptomsToAdd);
+      diagnosis.symptoms = symptomsToAdd;
+    }
     return symptoms;
   } catch (error) {
     throw error;

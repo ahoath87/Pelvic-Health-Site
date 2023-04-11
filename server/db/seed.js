@@ -187,7 +187,10 @@ async function testDB() {
     const diagnosisName = await getDiagnosisNameBySymptomId(1);
     console.log('getting name of diagnosis by symptoms id', diagnosisName);
 
-    const attachedSymptomsToDiagnosis = await attachSymptomsIdsToDiagnosis(1);
+    const attachedSymptomsToDiagnosis = await attachSymptomsIdsToDiagnosis([
+      { id: 1 },
+      { id: 4 },
+    ]);
     console.log('attaching symptoms to diagnosis', attachedSymptomsToDiagnosis);
 
     console.log('Finished database tests!');
