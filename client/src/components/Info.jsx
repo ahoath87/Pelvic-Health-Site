@@ -1,30 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './css/info.css';
 
 const Info = () => {
   return (
     <div className='info-container'>
-      <div className='quizboxlink'>
-        <div>
-          Take our symptom quiz to gain access to suggested treatments and
-          diagnosis
-        </div>
-        <div>
-          <Link className='clickhere'>
-            <p id='clickhere'>Click Here!</p>
-          </Link>
-        </div>
-      </div>
+      <div id='space'></div>
       <div className='facts'>
         Not Sure if this is speaking to ya.... keep scrolling
       </div>
       <div className='factlist'>
-        <div>FACT 1</div>
-        <div>FACT 2</div>
-        <div>FACT 3</div>
-        <div>FACT 4</div>
-        <div>FACT 5</div>
+        <ul id='factlist'>
+          <li>
+            In a study of date from 25,000 women 32% reported pelvic floor
+            disorders
+          </li>
+          <li>
+            1 in 4 Women will experience urinary or stress incontnence in thiee
+            lifetime
+          </li>
+          <li>60% of women avoid seeking care for pelvic floor complaints</li>
+          <li>
+            Postpartum women in the United States recieve one 15 minute
+            postpartum visit
+          </li>
+          <li>The number one reason women don't seek care is embarrasment</li>
+          <li>The second is an belief that it is NORMAL for women</li>
+        </ul>
       </div>
     </div>
   );
