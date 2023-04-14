@@ -12,11 +12,13 @@ const Home = () => {
       style={{
         backgroundImage: `url(${women})`,
         backgroundRepeat: 'no-repeat',
-        width: 3000,
+        // width: 3000,
       }}
     >
       <div id='home-text'>
         <h1 id='big-title'> Welcome. </h1>
+
+        <p id='describe'> A Free Pelvic Health Resource for Women</p>
         <div id='home-container'>
           <p id='site-description'>
             {' '}

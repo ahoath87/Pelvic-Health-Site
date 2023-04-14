@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './css/Nav.css';
+import logo from '../assets/images/logo.png';
 
 const Nav = () => {
   // const logout = () => {
@@ -16,13 +17,15 @@ const Nav = () => {
             <button className='quiz-reg-butt'>Sign Up Here!</button>
           </Link>
         </div>
-        <div>
+        <div id='quiz-reg-butt'>
           <Link to='/quiz'>
             <button className='quiz-nav-butt'>Symptom Quiz!</button>
           </Link>
         </div>
       </div>
-      <div>LOGO HERE</div>
+      <div id='logodiv'>
+        <img id='logoNav' src={logo}></img>
+      </div>
     </div>
   );
 };
