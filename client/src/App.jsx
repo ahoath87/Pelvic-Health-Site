@@ -13,6 +13,7 @@ import {
 } from './components/index';
 import { Route, Routes } from 'react-router-dom';
 import { fetchMe } from './api/auth';
+import InfoBox from './components/infobox';
 
 function App() {
   // const [backendUser, setBackendUser] = useState([{}]);
@@ -39,6 +40,7 @@ function App() {
             <div>
               <Nav />
               <Home />
+              <InfoBox />
               <Info />
             </div>
           }
