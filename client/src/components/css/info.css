@@ -1,0 +1,28 @@
+.info-container{
+    background-color: rgba(237, 219, 210, 0.507);
+   
+}
+.quizboxlink{
+   
+    padding: 3.5%;
+    width: 50%;
+   color: black;
+   background-color: white;
+   margin: auto;
+   margin-top: -45px;
+   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+   border-radius: 85px;
+}
+.clickhere{
+    text-decoration: none;
+}
+
+#clickhere{
+   margin-bottom: 0; 
+}
+.facts{
+    margin-top: 5%;
+}
+.factlist{
+    padding: 3%;
+}
