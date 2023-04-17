@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllTheDiagnosisIdsBySymptomId } from '../api/diagnosis';
+import { getAllTheDiagsBySymptomsId } from '../api/diagnosis';
 
 const SecondQuiz = ({ sentChoice }) => {
   const [diagnosis, setDiagnosis] = useState([]);
@@ -7,9 +7,7 @@ const SecondQuiz = ({ sentChoice }) => {
 
   useEffect(() => {
     const allDiagIds = async () => {
-      const fetchedDiagnosisIds = await getAllTheDiagnosisIdsBySymptomId(
-        sentChoice
-      );
+      const fetchedDiagnosisIds = await getAllTheDiagsBySymptomsId(sentChoice);
       console.log('this is fetched diagnosis Ids', fetchedDiagnosisIds);
       setDiagnosis(fetchedDiagnosisIds);
     };

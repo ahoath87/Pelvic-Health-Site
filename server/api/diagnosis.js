@@ -26,8 +26,8 @@ diagnosisRouter.get('/', async (req, res) => {
   }
 });
 
-diagnosisRouter.get('/diagnosis', async (req, res, next) => {
-  let id = 8;
+diagnosisRouter.get('/:symptomId/diagnosis', async (req, res, next) => {
+  let id = req.params.symptomId;
   console.log('this is req.params', id);
   try {
     const diagIds = await getDiagnosisInfoBySymptomId(id);
