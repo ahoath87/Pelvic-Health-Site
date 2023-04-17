@@ -17,7 +17,11 @@ const {
   getDiagnosisNameBySymptomId,
   getSymptomIdbySymptomDescription,
   getUser,
-  attachSymptomsIdsToDiagnosis,
+  attachSymptomsToDiagnosisSymps,
+  attachSymptomsToDiagnosis,
+  getAllSymptomsByDiagnosisId,
+  getDiagnosisIdsBySymptomId,
+  getDiagnosisInfoBySymptomId,
 } = require('./index');
 // const {
 //   createUser,
@@ -187,11 +191,24 @@ async function testDB() {
     const diagnosisName = await getDiagnosisNameBySymptomId(1);
     console.log('getting name of diagnosis by symptoms id', diagnosisName);
 
-    const attachedSymptomsToDiagnosis = await attachSymptomsIdsToDiagnosis([
-      { id: 1 },
-      { id: 4 },
-    ]);
+    const attachedAllToDiagnosis = await attachSymptomsToDiagnosis(diagnosis);
+    console.log('THIS IS IMPORTANT', diagnosis);
+    console.log('attaching EVERYTHING to diagnosis', attachedAllToDiagnosis[0]);
+
+    const attachedSymptomsToDiagnosis = await attachSymptomsToDiagnosisSymps(
+      dxsymptoms
+    );
+    console.log('$$$$$$$$$', dxsymptoms);
     console.log('attaching symptoms to diagnosis', attachedSymptomsToDiagnosis);
+
+    const getEmAll = await getAllSymptomsByDiagnosisId(1);
+    console.log('What we got here', getEmAll);
+
+    const fetchedDiagnosisIds = await getDiagnosisIdsBySymptomId(8);
+    console.log('What we got here', fetchedDiagnosisIds);
+
+    const fetchedDiagnosis = await getDiagnosisInfoBySymptomId(8);
+    console.log('What we got here part II', fetchedDiagnosis);
 
     console.log('Finished database tests!');
   } catch (error) {

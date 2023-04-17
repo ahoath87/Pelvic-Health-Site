@@ -10,3 +10,15 @@ export const getAllTheSymptoms = async () => {
     console.error(error);
   }
 };
+
+export const getTheSymptomDescByItsId = async (id) => {
+  console.log('this is id in getTheDESC', id);
+  try {
+    const response = await fetch(`${API_URL}/symptoms/${id}/description`);
+    const results = await response.json();
+    console.log('these are getSYMPT DESC by ids', results);
+    return results;
+  } catch (error) {
+    console.error(error);
+  }
+};

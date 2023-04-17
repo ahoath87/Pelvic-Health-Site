@@ -1,4 +1,8 @@
 const client = require('./client');
+const {
+  attachSymptomsToDiagnosisSymps,
+  attachSymptomsToDiagnosis,
+} = require('./diagnosisSymptoms');
 
 // ************* diagnosis starts here ************
 
@@ -49,6 +53,44 @@ const getDiagnosisById = async (diagnosisId) => {
   }
 };
 
+const getDiagnosisIdsBySymptomId = async (id) => {
+  try {
+    const {
+      rows: [...diagnosisIds],
+    } = await client.query(
+      `
+    SELECT diagnosissymptoms."diagnosisId" 
+    FROM diagnosissymptoms
+    WHERE diagnosissymptoms."symptomsAndSignsId" = $1
+    `,
+      [id]
+    );
+    return diagnosisIds;
+  } catch (error) {
+    console.error('error in getDiagnosisIdBySymtpomId', error);
+  }
+};
+
+const getDiagnosisInfoBySymptomId = async (id) => {
+  try {
+    const {
+      rows: [...diagnosis],
+    } = await client.query(
+      `
+    SELECT diagnosis.*
+    FROM diagnosis
+    JOIN diagnosissymptoms ON diagnosis.id = diagnosissymptoms."diagnosisId"
+    WHERE diagnosissymptoms."symptomsAndSignsId" = $1
+    `,
+      [id]
+    );
+    let attachedDiags = attachSymptomsToDiagnosis(diagnosis);
+    return attachedDiags;
+  } catch (error) {
+    console.error('error in getDiagnosisIdBySymtpomId', error);
+  }
+};
+
 //get a diagnosis by its symptoms and sign Id
 async function getDiagnosisNameBySymptomId(symptomsAndSignsId) {
   try {
@@ -68,9 +110,32 @@ async function getDiagnosisNameBySymptomId(symptomsAndSignsId) {
   }
 }
 
+async function getAllSymptomsByDiagnosisId(id) {
+  try {
+    console.log('this is ID in getALldaignosisbysymptomsId', id);
+    const { rows: diagSymps } = await client.query(
+      `
+    SELECT diagnosisSymptoms.*
+    FROM diagnosisSymptoms
+    WHERE diagnosisSymptoms."diagnosisId" = $1
+    `,
+      [id]
+    );
+    console.log('this is DIAGSYMPTS', diagSymps);
+    const attachedDiagSymp = attachSymptomsToDiagnosisSymps(diagSymps);
+
+    return attachedDiagSymp;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createDiagnosis,
   getDiagnosisById,
   getAllDiagnosis,
   getDiagnosisNameBySymptomId,
+  getAllSymptomsByDiagnosisId,
+  getDiagnosisIdsBySymptomId,
+  getDiagnosisInfoBySymptomId,
 };

@@ -34,6 +34,22 @@ const getAllSymptoms = async () => {
   }
 };
 
+const getSymptomDescBySympId = async (id) => {
+  try {
+    const { rows: symptomDesc } = await client.query(
+      `
+      SELECT symptomsAndSigns.description
+       FROM symptomsAndSigns
+       WHERE symptomsAndSigns.id = $1
+      `,
+      [id]
+    );
+    return symptomDesc;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const getSymptomIdbySymptomDescription = async (description) => {
   try {
     const {
@@ -101,16 +117,11 @@ async function getAllSymptomsByDiagnosis(id) {
 //   } catch (error) {}
 // }
 
-// get all diagnosis by symptomandsign Id
-// get all symtpoms by diagnosis ids
-// get all symptoms by diagnosis id --- attach the symptoms map them and exclude the original symptom
-
-// get symptoms by diagnosis Id
-
 module.exports = {
   createSymptoms,
   getAllSymptoms,
   getSymptomById,
   getAllSymptomsByDiagnosis,
   getSymptomIdbySymptomDescription,
+  getSymptomDescBySympId,
 };
