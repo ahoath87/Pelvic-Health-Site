@@ -19,6 +19,7 @@ const {
   getUser,
   attachSymptomsToDiagnosisSymps,
   attachSymptomsToDiagnosis,
+  getAllSymptomsByDiagnosisId,
 } = require('./index');
 // const {
 //   createUser,
@@ -195,6 +196,9 @@ async function testDB() {
       dxsymptoms
     );
     console.log('attaching symptoms to diagnosis', attachedSymptomsToDiagnosis);
+
+    const getEmAll = await getAllSymptomsByDiagnosisId(1);
+    console.log('What we got here', getEmAll);
 
     console.log('Finished database tests!');
   } catch (error) {

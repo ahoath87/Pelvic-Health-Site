@@ -54,7 +54,7 @@ async function getDiagnosisBySymptomId(symptomsAndSignsId) {
 
 async function attachSymptomsToDiagnosis(diagnosises) {
   const diagnosisToReturn = [...diagnosises];
-  console.log('these are diganosis to return', diagnosisToReturn);
+  // console.log('these are diganosis to return', diagnosisToReturn);
 
   try {
     const { rows: symptoms } = await client.query(
@@ -69,7 +69,7 @@ async function attachSymptomsToDiagnosis(diagnosises) {
       const allSymptomsToAdd = symptoms.filter(
         (symptom) => symptom.diagnosisId === diagnosis.id
       );
-      console.log('this is ALLSymptomsToAdd', allSymptomsToAdd);
+      // console.log('this is ALLSymptomsToAdd', allSymptomsToAdd);
       diagnosis.symptoms = allSymptomsToAdd;
     }
     return diagnosisToReturn;
@@ -80,7 +80,7 @@ async function attachSymptomsToDiagnosis(diagnosises) {
 
 async function attachSymptomsToDiagnosisSymps(diagnosissymtoms) {
   const diagnosisSymptomsToReturn = [...diagnosissymtoms];
-  console.log('these are diganosis to return', diagnosisSymptomsToReturn);
+  // console.log('these are diganosis to return', diagnosisSymptomsToReturn);
 
   try {
     const { rows: symptoms } = await client.query(
@@ -95,14 +95,14 @@ async function attachSymptomsToDiagnosisSymps(diagnosissymtoms) {
       const symptomsToAdd = symptoms.filter(
         (symptom) => symptom.id === diagnosissymptom.symptomsAndSignsId
       );
-      console.log('this is symptoms &&&&', symptoms);
-      console.log(
-        'this is diagnosissymptoms',
-        diagnosissymptom.symptomsAndSignsId
-      );
+      // console.log('this is symptoms &&&&', symptoms);
+      // console.log(
+      //   'this is diagnosissymptoms',
+      //   diagnosissymptom.symptomsAndSignsId
+      // );
 
       diagnosissymptom.symptoms = symptomsToAdd;
-      console.log('this is symptomsToADd', symptomsToAdd);
+      // console.log('this is symptomsToADd', symptomsToAdd);
     }
     return diagnosisSymptomsToReturn;
   } catch (error) {

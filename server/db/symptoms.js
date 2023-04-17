@@ -101,12 +101,6 @@ async function getAllSymptomsByDiagnosis(id) {
 //   } catch (error) {}
 // }
 
-// get all diagnosis by symptomandsign Id
-// get all symtpoms by diagnosis ids
-// get all symptoms by diagnosis id --- attach the symptoms map them and exclude the original symptom
-
-// get symptoms by diagnosis Id
-
 module.exports = {
   createSymptoms,
   getAllSymptoms,

@@ -1,4 +1,5 @@
 const client = require('./client');
+const { attachSymptomsToDiagnosisSymps } = require('./diagnosisSymptoms');
 
 // ************* diagnosis starts here ************
 
@@ -68,9 +69,30 @@ async function getDiagnosisNameBySymptomId(symptomsAndSignsId) {
   }
 }
 
+async function getAllSymptomsByDiagnosisId(id) {
+  try {
+    console.log('this is ID in getALldaignosisbysymptomsId', id);
+    const { rows: diagSymps } = await client.query(
+      `
+    SELECT diagnosisSymptoms.*
+    FROM diagnosisSymptoms
+    WHERE diagnosisSymptoms."diagnosisId" = $1
+    `,
+      [id]
+    );
+    console.log('this is DIAGSYMPTS', diagSymps);
+    const attachedDiagSymp = attachSymptomsToDiagnosisSymps(diagSymps);
+
+    return attachedDiagSymp;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createDiagnosis,
   getDiagnosisById,
   getAllDiagnosis,
   getDiagnosisNameBySymptomId,
+  getAllSymptomsByDiagnosisId,
 };
