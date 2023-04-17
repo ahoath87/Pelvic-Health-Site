@@ -9,14 +9,34 @@ const SecondQuiz = ({ sentChoice }) => {
     const allDiagIds = async () => {
       const fetchedDiagnosisIds = await getAllTheDiagsBySymptomsId(sentChoice);
       console.log('this is fetched diagnosis Ids', fetchedDiagnosisIds);
-      setDiagnosis(fetchedDiagnosisIds);
+      setDiagnosis(fetchedDiagnosisIds.diagIds);
     };
     allDiagIds();
   }, []);
 
   console.log('this is diagnosis', diagnosis);
 
-  return <div>This will be second quiz</div>;
+  return (
+    <div className='secondQuiz-container'>
+      <div className='secondQuiz-choices'>
+        {diagnosis &&
+          diagnosis.map((singleDiagnosis) => {
+            return (
+              <div key={singleDiagnosis.id} className='sec-quiz-small'>
+                <p>Diag Option: {singleDiagnosis.id}</p>
+                {singleDiagnosis.symptoms.map((symptom) => {
+                  return (
+                    <div key={symptom.id} className='secondQuiz-symptoms'>
+                      <p> Choice: {symptom.symptomsAndSignsId}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+      </div>
+    </div>
+  );
 };
 
 export default SecondQuiz;
