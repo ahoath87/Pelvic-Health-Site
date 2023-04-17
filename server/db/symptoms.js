@@ -34,6 +34,22 @@ const getAllSymptoms = async () => {
   }
 };
 
+const getSymptomDescBySympId = async (id) => {
+  try {
+    const { rows: symptomDesc } = await client.query(
+      `
+      SELECT symptomsAndSigns.description
+       FROM symptomsAndSigns
+       WHERE symptomsAndSigns.id = $1
+      `,
+      [id]
+    );
+    return symptomDesc;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const getSymptomIdbySymptomDescription = async (description) => {
   try {
     const {
@@ -107,4 +123,5 @@ module.exports = {
   getSymptomById,
   getAllSymptomsByDiagnosis,
   getSymptomIdbySymptomDescription,
+  getSymptomDescBySympId,
 };

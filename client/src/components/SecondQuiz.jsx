@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getAllTheDiagsBySymptomsId } from '../api/diagnosis';
+import { getTheSymptomDescByItsId } from '../api/symptoms';
 
 const SecondQuiz = ({ sentChoice }) => {
   const [diagnosis, setDiagnosis] = useState([]);
+  const [symptomsDesc, setSymptomsDesc] = useState([]);
   console.log('this is symptom choice in second quiz', sentChoice);
 
   useEffect(() => {
@@ -10,6 +12,24 @@ const SecondQuiz = ({ sentChoice }) => {
       const fetchedDiagnosisIds = await getAllTheDiagsBySymptomsId(sentChoice);
       console.log('this is fetched diagnosis Ids', fetchedDiagnosisIds);
       setDiagnosis(fetchedDiagnosisIds.diagIds);
+      console.log('MONEYBABY', fetchedDiagnosisIds.diagIds);
+      let gatheredSymptomIds = fetchedDiagnosisIds.diagIds.map(
+        (singleFetched) => {
+          console.log('AREWETHREE', singleFetched.symptoms);
+          let deeperSymptoms = singleFetched.symptoms.map(
+            async (evenDeeper) => {
+              const newArray = [];
+              newArray.push(
+                getTheSymptomDescByItsId(evenDeeper.symptomsAndSignsId)
+              );
+              return newArray;
+            }
+          );
+          console.log('CRAY', deeperSymptoms);
+        }
+      );
+      setSymptomsDesc(gatheredSymptomIds);
+      console.log('this si symptomsDesc', symptomsDesc);
     };
     allDiagIds();
   }, []);
