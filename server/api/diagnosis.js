@@ -1,5 +1,11 @@
 const express = require('express');
-const { getAllDiagnosis } = require('../db');
+const {
+  getAllDiagnosis,
+  getDiagnosisIdsBySymptomId,
+  getDiagnosisInfoBySymptomId,
+  attachSymptomsToDiagnosis,
+  attachSymptomsToDiagnosisSymps,
+} = require('../db');
 const diagnosisRouter = express.Router();
 
 diagnosisRouter.use((req, res, next) => {
@@ -9,10 +15,31 @@ diagnosisRouter.use((req, res, next) => {
 });
 
 diagnosisRouter.get('/', async (req, res) => {
-  const diagnosis = await getAllDiagnosis();
-  res.send({
-    diagnosis,
-  });
+  try {
+    const diagnosis = await getAllDiagnosis();
+    res.send({
+      diagnosis,
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+diagnosisRouter.get('/diagnosis', async (req, res, next) => {
+  let id = 8;
+  console.log('this is req.params', id);
+  try {
+    const diagIds = await getDiagnosisInfoBySymptomId(id);
+    console.log('THIS IS DIAGIDS', diagIds);
+    //  let attachedDiags= attachSymptomsToDiagnosisSymps(diagIds);
+    res.send({
+      diagIds,
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
 });
 
 module.exports = diagnosisRouter;

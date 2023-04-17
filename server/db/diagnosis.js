@@ -1,5 +1,8 @@
 const client = require('./client');
-const { attachSymptomsToDiagnosisSymps } = require('./diagnosisSymptoms');
+const {
+  attachSymptomsToDiagnosisSymps,
+  attachSymptomsToDiagnosis,
+} = require('./diagnosisSymptoms');
 
 // ************* diagnosis starts here ************
 
@@ -50,6 +53,44 @@ const getDiagnosisById = async (diagnosisId) => {
   }
 };
 
+const getDiagnosisIdsBySymptomId = async (id) => {
+  try {
+    const {
+      rows: [...diagnosisIds],
+    } = await client.query(
+      `
+    SELECT diagnosissymptoms."diagnosisId" 
+    FROM diagnosissymptoms
+    WHERE diagnosissymptoms."symptomsAndSignsId" = $1
+    `,
+      [id]
+    );
+    return diagnosisIds;
+  } catch (error) {
+    console.error('error in getDiagnosisIdBySymtpomId', error);
+  }
+};
+
+const getDiagnosisInfoBySymptomId = async (id) => {
+  try {
+    const {
+      rows: [...diagnosis],
+    } = await client.query(
+      `
+    SELECT diagnosis.*
+    FROM diagnosis
+    JOIN diagnosissymptoms ON diagnosis.id = diagnosissymptoms."diagnosisId"
+    WHERE diagnosissymptoms."symptomsAndSignsId" = $1
+    `,
+      [id]
+    );
+    let attachedDiags = attachSymptomsToDiagnosis(diagnosis);
+    return attachedDiags;
+  } catch (error) {
+    console.error('error in getDiagnosisIdBySymtpomId', error);
+  }
+};
+
 //get a diagnosis by its symptoms and sign Id
 async function getDiagnosisNameBySymptomId(symptomsAndSignsId) {
   try {
@@ -95,4 +136,6 @@ module.exports = {
   getAllDiagnosis,
   getDiagnosisNameBySymptomId,
   getAllSymptomsByDiagnosisId,
+  getDiagnosisIdsBySymptomId,
+  getDiagnosisInfoBySymptomId,
 };
