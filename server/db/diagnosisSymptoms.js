@@ -1,4 +1,5 @@
 const client = require('./client');
+const { diagnosisSymptoms } = require('./data');
 
 //inserts a diagnosis symtpom
 const createDiagnosisSymptoms = async (diagnosisSymptoms) => {
@@ -58,21 +59,20 @@ async function attachSymptomsToDiagnosis(diagnosises) {
   try {
     const { rows: symptoms } = await client.query(
       `
-  SELECT symptomsandsigns.*
-  FROM symptomsandsigns
-  JOIN diagnosissymptoms ON symptomsandsigns.id = diagnosissymptoms."symptomsAndSignsId"
+  SELECT diagnosissymptoms.*
+  FROM diagnosissymptoms
   JOIN diagnosis ON diagnosissymptoms."diagnosisId" = diagnosis.id
   `
     );
 
     for (const diagnosis of diagnosisToReturn) {
-      const symptomsToAdd = symptoms.filter(
-        (symptom) => symptom.id === symptomsAndSignsID.symptomAndSignId
+      const allSymptomsToAdd = symptoms.filter(
+        (symptom) => symptom.diagnosisId === diagnosis.id
       );
-      console.log('this is symptomsToADd', symptomsToAdd);
-      diagnosis.symptoms = symptomsToAdd;
+      console.log('this is ALLSymptomsToAdd', allSymptomsToAdd);
+      diagnosis.symptoms = allSymptomsToAdd;
     }
-    return symptoms;
+    return diagnosisToReturn;
   } catch (error) {
     throw error;
   }
