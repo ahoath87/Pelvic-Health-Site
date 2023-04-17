@@ -51,7 +51,7 @@ async function getDiagnosisBySymptomId(symptomsAndSignsId) {
   }
 }
 
-async function attachSymptomsIdsToDiagnosis(diagnosises) {
+async function attachSymptomsToDiagnosis(diagnosises) {
   const diagnosisToReturn = [...diagnosises];
   console.log('these are diganosis to return', diagnosisToReturn);
 
@@ -61,14 +61,13 @@ async function attachSymptomsIdsToDiagnosis(diagnosises) {
   SELECT symptomsandsigns.*
   FROM symptomsandsigns
   JOIN diagnosissymptoms ON symptomsandsigns.id = diagnosissymptoms."symptomsAndSignsId"
-  WHERE diagnosisId = ANY ${diagnosises}
-  
+  JOIN diagnosis ON diagnosissymptoms."diagnosisId" = diagnosis.id
   `
     );
 
     for (const diagnosis of diagnosisToReturn) {
       const symptomsToAdd = symptoms.filter(
-        (symptom) => symptom.id === diagnosis.symptomId
+        (symptom) => symptom.id === symptomsAndSignsID.symptomAndSignId
       );
       console.log('this is symptomsToADd', symptomsToAdd);
       diagnosis.symptoms = symptomsToAdd;
@@ -79,9 +78,42 @@ async function attachSymptomsIdsToDiagnosis(diagnosises) {
   }
 }
 
+async function attachSymptomsToDiagnosisSymps(diagnosissymtoms) {
+  const diagnosisSymptomsToReturn = [...diagnosissymtoms];
+  console.log('these are diganosis to return', diagnosisSymptomsToReturn);
+
+  try {
+    const { rows: symptoms } = await client.query(
+      `
+  SELECT symptomsandsigns.*
+  FROM symptomsandsigns
+  JOIN diagnosissymptoms ON symptomsandsigns.id = diagnosissymptoms."symptomsAndSignsId"
+  `
+    );
+
+    for (const diagnosissymptom of diagnosisSymptomsToReturn) {
+      const symptomsToAdd = symptoms.filter(
+        (symptom) => symptom.id === diagnosissymptom.symptomsAndSignsId
+      );
+      console.log('this is symptoms &&&&', symptoms);
+      console.log(
+        'this is diagnosissymptoms',
+        diagnosissymptom.symptomsAndSignsId
+      );
+
+      diagnosissymptom.symptoms = symptomsToAdd;
+      console.log('this is symptomsToADd', symptomsToAdd);
+    }
+    return diagnosisSymptomsToReturn;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createDiagnosisSymptoms,
   getAllDiagnosisSymptoms,
   getDiagnosisBySymptomId,
-  attachSymptomsIdsToDiagnosis,
+  attachSymptomsToDiagnosis,
+  attachSymptomsToDiagnosisSymps,
 };
