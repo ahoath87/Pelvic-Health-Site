@@ -10,6 +10,8 @@ import {
   SecondQuiz,
   SmallNav,
   Info,
+  Footer,
+  BlogHome,
 } from './components/index';
 import { Route, Routes } from 'react-router-dom';
 import { fetchMe } from './api/auth';
@@ -42,6 +44,8 @@ function App() {
               <Home />
               <InfoBox />
               <Info />
+              <BlogHome />
+              <Footer />
             </div>
           }
         ></Route>
