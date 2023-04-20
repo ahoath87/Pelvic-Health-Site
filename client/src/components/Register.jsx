@@ -1,7 +1,8 @@
 import './css/Register.css';
 import signupimg from '../assets/images/signupimg.png';
-
+import { Link } from 'react-router-dom';
 import { React, useState } from 'react';
+
 import { registerUser } from '../api/auth';
 
 const Register = ({ setToken }) => {
@@ -13,7 +14,7 @@ const Register = ({ setToken }) => {
   return (
     <div className='reg-container'>
       <div className='regimg-container'>
-        <img src={signupimg}></img>
+        <img src={signupimg} alt='women collage'></img>
       </div>
       <div className='regform-container'>
         <form
@@ -46,7 +47,7 @@ const Register = ({ setToken }) => {
           }}
         >
           <div className='regform-inputs'>
-            <h2>Registration</h2>
+            <h2>Sign Up</h2>
 
             <input
               id='User'
@@ -63,10 +64,10 @@ const Register = ({ setToken }) => {
               onChange={(e) => setPassword(e.target.value)}
             ></input>
             <input
-              id='reg_name'
+              id='Pass'
               value={name}
               type='text'
-              placeholder='Name here'
+              placeholder='name'
               onChange={(e) => setName(e.target.value)}
             ></input>
             <input
@@ -77,8 +78,14 @@ const Register = ({ setToken }) => {
               onChange={(e) => setEmail(e.target.value)}
             ></input>
             <button id='submitten' type='submit'>
-              submit
+              <span>Lets Go!</span>
             </button>
+            <p id='linkstologs'>
+              Already a member?{' '}
+              <Link to='/login' id='wordlink'>
+                Head to Login!
+              </Link>
+            </p>
           </div>
         </form>
       </div>

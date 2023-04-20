@@ -1,6 +1,7 @@
 import './css/Login.css';
 import { React, useState } from 'react';
 import { loginUser } from '../api/auth';
+import { Link } from 'react-router-dom';
 import loginimg2 from '../assets/images/loginimg2.png';
 
 const Login = ({ setToken }) => {
@@ -57,6 +58,12 @@ const Login = ({ setToken }) => {
             <button id='submitten' type='submit'>
               <span>Lets Go!</span>
             </button>
+            <p id='linksignup'>
+              Not a member yet?{' '}
+              <Link to='/register' id='wordlink'>
+                Sign up here!
+              </Link>
+            </p>
           </div>
         </form>
       </div>

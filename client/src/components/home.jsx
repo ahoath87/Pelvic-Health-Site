@@ -22,36 +22,39 @@ const Home = () => {
         <div id='home-container'>
           <p id='site-description'>
             {' '}
-            Did you know that conclusions a Doc makes about your diagnosis and
-            treatments on visit one are 80% due to your subjective description
-            of complaints?!{' '}
+            Did you know that 70-80% of the information Doctors need to make a
+            diagnosis comes just from what you tell them!?{' '}
           </p>
           <p id='site-description'>
-            Click here to find out what this means for you{' '}
+            Click{' '}
+            <Link id='linkinsign' to='/register'>
+              HERE
+            </Link>{' '}
+            to find out how this can help you{' '}
           </p>
 
           <div id='home-buttons'>
             <p id='site-description'>
               {' '}
-              Register and Login to gain access to our diagnosis and treatments
+              Register or Login to gain access to our diagnosis and treatments
               guided questionaire!{' '}
             </p>
           </div>
         </div>
-        <div className='button-container'>
+        {/* <div className='button-container'>
           <div className='butt-div'>
             {' '}
             <Link id='home-reglink' to='/register'>
-              Register Here!{' '}
+              Register{' '}
             </Link>
           </div>
           <div className='butt-div'>
             {' '}
             <Link id='home-loglink' to='/login'>
-              Login Here!
+              Login
             </Link>
           </div>{' '}
-        </div>
+        </div> */}
       </div>
     </div>
   );
