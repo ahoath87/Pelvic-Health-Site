@@ -3,16 +3,19 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 5%;
+    margin-top: 2%;
    
     
 }
 .logimg-container img{
-    width: 90%;
-    margin-right: 10%;
+    width: 100%;
+    
 }
 .logform-container{
     padding: 3%;
     padding-bottom: 5%;
+    margin-bottom: 6%;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 

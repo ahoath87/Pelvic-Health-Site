@@ -2,7 +2,7 @@ import './css/Login.css';
 import { React, useState } from 'react';
 import { loginUser } from '../api/auth';
 import { Link } from 'react-router-dom';
-import loginimg2 from '../assets/images/loginimg2.png';
+import loginimg3 from '../assets/images/loginimg3.png';
 
 const Login = ({ setToken }) => {
   const [username, setUsername] = useState('');
@@ -12,7 +12,7 @@ const Login = ({ setToken }) => {
     <div className='login-container'>
       <div className='logimg-container'>
         <div id='img-container'>
-          <img src={loginimg2}></img>
+          <img src={loginimg3}></img>
         </div>
       </div>
       <div className='logform-container'>
