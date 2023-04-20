@@ -41,7 +41,7 @@ cursor: pointer;
 .quiz-reg-butt{
     padding: 10% 18%;
 	border-radius: 85px;
-    background-color: rgb(176, 204, 192);
+    background-color: #b0ccc0;
    border: none;
    color: white;
    font-weight: 900;

@@ -16,7 +16,7 @@
   font-size: 15vmin;
   margin-bottom: 0;
   margin-top: 0;
-  background-image: linear-gradient(90deg, rgba(255,145,144,1)  0%, rgba(253, 159, 150) 56%,  rgb(255,145,144,1) 100%);
+  background-image: linear-gradient(90deg, rgba(230,130,103,1)  0%, rgba(253, 159, 150) 56%,  rgb(230,130,103,1) 100%);
   color: transparent;
   -webkit-background-clip: text;
   animation: move 1s infinite;
