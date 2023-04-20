@@ -3,9 +3,9 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    
     margin-left: 0;
-    background-color: rgba(253, 159, 150, 0.713);
+    background-color: #d69c8cd9;
     padding: 1.5%;
     position: sticky;
     top: 0;

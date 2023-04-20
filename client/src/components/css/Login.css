@@ -1,0 +1,78 @@
+.login-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    margin-top: 2%;
+   
+    
+}
+.logimg-container img{
+    width: 100%;
+    
+}
+.logform-container{
+    padding: 3%;
+    padding-bottom: 5%;
+    margin-bottom: 6%;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.loginform-stuff{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.loginform-stuff h2{
+    padding-bottom: 10%;
+    margin-top: 0;
+    font-size: 200%;
+}
+.loginform-stuff input{
+    padding-bottom: 3%;
+    padding-top: 3%;
+    margin-bottom: 8%;
+}
+#submitten{
+    border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #222;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+  margin-top: 4%;
+}
+#submitten span {
+    position: relative; 
+    z-index: 1;
+  }
+  
+  #submitten:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 490%;
+    width: 140%;
+    background: rgb(176, 204, 192);
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+    transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  }
+  
+  #submitten:hover:after {
+    -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+    transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  }

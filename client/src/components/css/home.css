@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 .home{
-    width: 100%;
+   
     padding: 10%;
     padding-top: 2%;
     font-size: 20px;
@@ -16,7 +16,7 @@
   font-size: 15vmin;
   margin-bottom: 0;
   margin-top: 0;
-  background-image: linear-gradient(90deg, rgba(255,145,144,1)  0%, rgba(253, 159, 150) 56%,  rgb(255,145,144,1) 100%);
+  background-image: linear-gradient(90deg, rgba(230,130,103,1)  0%, rgba(253, 159, 150) 56%,  rgb(230,130,103,1) 100%);
   color: transparent;
   -webkit-background-clip: text;
   animation: move 1s infinite;
@@ -29,6 +29,8 @@
 
 #describe{
   margin-top: 0;
+  font-weight: 900;
+  font-size: 150%;
 }
 #home-container{
 padding-left: 10%;
@@ -38,6 +40,10 @@ padding-right: 10%;
 #site-description{
   font-weight: 900;
   margin-top: 0;
+}
+#linkinsign{
+  color: rgb(176, 204, 192);
+  text-decoration: none;
 }
 
 .button-container{
@@ -49,13 +55,15 @@ padding-right: 10%;
 }
 .butt-div{
   width: 28%;
+  margin-right: -5%;
+  margin-left: -5%;
 }
 #home-loglink{
   color: white;
   font-weight: 900;
   background-color: rgb(176, 204, 192);
   text-decoration: none;
-  padding: 5% 10%;
+  padding: 7% 13%;
 	border-radius: 85px;
   
 }
@@ -68,7 +76,7 @@ color: rgba(0, 0, 0, 0.725);
   font-weight: 900;
   background-color: rgb(176, 204, 192);
   text-decoration: none;
-  padding: 5% 10%;
+  padding: 7% 13%;
 	border-radius: 85px;
 }
 #home-reglink:hover{
