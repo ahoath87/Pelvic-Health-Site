@@ -17,7 +17,7 @@ const Nav = () => {
             <button className='quiz-reg-butt'>Sign Up Here!</button>
           </Link>
         </div>
-        <div id='quiz-reg-butt'>
+        <div id='quiz-nav-butt'>
           <Link to='/quiz'>
             <button className='quiz-nav-butt'>Symptom Quiz!</button>
           </Link>

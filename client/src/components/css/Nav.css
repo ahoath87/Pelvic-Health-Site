@@ -3,23 +3,28 @@
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
-    width: 99%;
+   
     margin-left: 0;
     margin-right: 0;
     background-color: rgba(237, 219, 210, 0.507);
     padding-left: 2%;
+    padding-right: 4%;
 }
 #links{
-    width: 30%;
+    width: 20%;
     align-items: center;
     justify-content: center;
-    margin-right: 4%;
+    
     
 }
 #quiz-reg-butt{
-    width: 80%;
+    width: 100%;
+}
+#quiz-nav-butt{
+    width: 100%;
 }
 .quiz-nav-butt{
+   
     padding: 10% 18%;
 	border-radius: 85px;
     background-color: rgb(176, 204, 192);
@@ -54,8 +59,9 @@ cursor: pointer;
 #logoNav{
     width: 40%;
     display: flex;
-    
-    
+    transition: all .2s ease-in-out; 
 }
-
+#logoNav:hover{
+    transform: scale(1.1);
+}
 
