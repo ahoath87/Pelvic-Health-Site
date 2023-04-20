@@ -5,6 +5,7 @@ import { getTheSymptomDescByItsId } from '../api/symptoms';
 const SecondQuiz = ({ sentChoice }) => {
   const [diagnosis, setDiagnosis] = useState([]);
   const [symptomsDesc, setSymptomsDesc] = useState([]);
+  const [sympList, setSympList] = useState([]);
   console.log('this is symptom choice in second quiz', sentChoice);
 
   useEffect(() => {
@@ -16,18 +17,23 @@ const SecondQuiz = ({ sentChoice }) => {
       let gatheredSymptomIds = fetchedDiagnosisIds.diagIds.map(
         (singleFetched) => {
           console.log('AREWETHREE', singleFetched.symptoms);
+
           let deeperSymptoms = singleFetched.symptoms.map(
             async (evenDeeper) => {
-              const newArray = [];
-              newArray.push(
-                getTheSymptomDescByItsId(evenDeeper.symptomsAndSignsId)
-              );
-              return newArray;
+              // const newArray = [];
+              // newArray.push(
+              //   getTheSymptomDescByItsId(evenDeeper.symptomsAndSignsId)
+              // );
+
+              // return newArray;
+              console.log('CRAYEST', evenDeeper);
+              setSympList([evenDeeper]);
             }
           );
-          console.log('CRAY', deeperSymptoms);
+          console.log('CRAY', sympList);
         }
       );
+      console.log('CRAY CRAY', gatheredSymptomIds);
       setSymptomsDesc(gatheredSymptomIds);
       console.log('this si symptomsDesc', symptomsDesc);
     };

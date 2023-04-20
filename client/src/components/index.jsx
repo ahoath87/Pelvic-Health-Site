@@ -6,3 +6,5 @@ export { default as SecondQuiz } from './SecondQuiz';
 export { default as Quiz } from './Quiz';
 export { default as SmallNav } from './SmallNav';
 export { default as Info } from './Info';
+export { default as Footer } from './Footer';
+export { default as BlogHome } from './BlogHome';
