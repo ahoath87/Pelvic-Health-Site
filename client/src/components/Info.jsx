@@ -1,8 +1,10 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import './css/info.css';
+import { motion, useScroll } from 'framer-motion';
 
 const Info = () => {
+  const { scrollYProgress } = useScroll();
   return (
     <div className='info-container'>
       <div id='space'></div>
@@ -27,6 +29,9 @@ const Info = () => {
           <li>The number one reason women don't seek care is embarrasment</li>
           <li>The second is an belief that it is NORMAL for women</li>
         </ul>
+      </div>
+      <div>
+        <motion.div style={{ scaleX: scrollYProgress }} />
       </div>
     </div>
   );
